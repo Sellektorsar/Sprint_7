@@ -1,6 +1,7 @@
 import requests
 import allure
-from tests.helpers import generate_random_string, register_new_courier_and_return_login_password, delete_courier
+from utils import generate_random_string
+from api import register_new_courier_and_return_login_password, delete_courier
 
 BASE_URL = 'https://qa-scooter.praktikum-services.ru/api/v1/'
 
