@@ -1,8 +1,8 @@
 import pytest
 import requests
 import allure
+from data import ORDERS_URL, ORDER_DATA
 
-BASE_URL = 'https://qa-scooter.praktikum-services.ru/api/v1/'
 
 class TestOrderCreation:
 
@@ -12,19 +12,10 @@ class TestOrderCreation:
         ["GREY"],
         ["BLACK", "GREY"]
     ])
-    @allure.step('Создать заказ с цветом: {color}')
+    @allure.title('Создать заказ (параметризовано по цвету)')
     def test_create_order(self, color):
-        payload = {
-            "firstName": "Test",
-            "lastName": "User",
-            "address": "Test Address 123",
-            "metroStation": 1,
-            "phone": "+7 800 355 35 35",
-            "rentTime": 5,
-            "deliveryDate": "2023-06-06",
-            "comment": "Test comment",
-            "color": color
-        }
-        response = requests.post(BASE_URL + 'orders', json=payload)
+        payload = ORDER_DATA.copy()
+        payload['color'] = color
+        response = requests.post(ORDERS_URL, json=payload)
         assert response.status_code == 201
         assert 'track' in response.json()

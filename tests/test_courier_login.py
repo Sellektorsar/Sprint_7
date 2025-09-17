@@ -46,6 +46,15 @@ class TestCourierLogin:
         login_payload = {"login": "login"}
         response = requests.post(COURIER_LOGIN_URL, json=login_payload)
         assert response.status_code == 504  # API возвращает 504 при отсутствии пароля
+        # На стенде ответ может прийти не в формате JSON (например, 'Service unavailable')
+        try:
+            data = response.json()
+            # Если сервер вернул JSON — проверим наличие поля message и что оно не пустое
+            assert 'message' in data
+            assert isinstance(data['message'], str) and data['message']
+        except ValueError:
+            # Ответ не в формате JSON — как минимум должен быть непустой текст
+            assert response.text is not None and response.text != ''
 
     @allure.title('Авторизация несуществующего пользователя')
     def test_login_non_existent(self):

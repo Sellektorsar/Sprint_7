@@ -1,11 +1,11 @@
 BASE_URL = 'https://qa-scooter.praktikum-services.ru/api/v1/'
 
-# URLs
+# Эндпоинты API
 COURIER_URL = BASE_URL + 'courier'
 COURIER_LOGIN_URL = BASE_URL + 'courier/login'
 ORDERS_URL = BASE_URL + 'orders'
 
-# Test data
+# Тестовые данные заказа по умолчанию
 ORDER_DATA = {
     "firstName": "Test",
     "lastName": "User",
@@ -18,8 +18,13 @@ ORDER_DATA = {
     "color": []
 }
 
-# Response messages
+# Сообщения об ошибках
 ERROR_MISSING_DATA = "Недостаточно данных для создания учетной записи"
 ERROR_DUPLICATE_LOGIN = "Этот логин уже используется. Попробуйте другой."
 ERROR_LOGIN_FAILED = "Учетная запись не найдена"
 ERROR_MISSING_LOGIN_DATA = "Недостаточно данных для входа"
+ERROR_MISSING_COURIER_ID = "Недостаточно данных для поиска"
+ERROR_COURIER_NOT_FOUND = "Курьера с таким id не существует"
+ERROR_ORDER_NOT_FOUND = "Заказа с таким id не существует"
+# В некоторых ручках текст отличается (короткая форма)
+ERROR_COURIER_NOT_FOUND_SHORT = "Курьера с таким id нет."

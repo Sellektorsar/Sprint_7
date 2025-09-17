@@ -1,13 +1,12 @@
 import requests
 import allure
-
-BASE_URL = 'https://qa-scooter.praktikum-services.ru/api/v1/'
+from data import ORDERS_URL
 
 class TestOrdersList:
 
-    @allure.step('Получить список заказов')
+    @allure.title('Получить список заказов')
     def test_get_orders_list(self):
-        response = requests.get(BASE_URL + 'orders')
+        response = requests.get(ORDERS_URL)
         assert response.status_code == 200
         data = response.json()
         assert 'orders' in data

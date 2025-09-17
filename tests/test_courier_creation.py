@@ -1,6 +1,6 @@
 import requests
 import allure
-from data import COURIER_URL, ERROR_MISSING_DATA, ERROR_DUPLICATE_LOGIN
+from data import COURIER_URL, COURIER_LOGIN_URL, ERROR_MISSING_DATA, ERROR_DUPLICATE_LOGIN
 from utils import generate_random_string
 from api import delete_courier
 
@@ -22,7 +22,7 @@ class TestCourierCreation:
         assert data == {"ok": True}
         # Очистка
         login_payload = {"login": login, "password": password}
-        login_response = requests.post(COURIER_URL + '/login', json=login_payload)
+        login_response = requests.post(COURIER_LOGIN_URL, json=login_payload)
         courier_id = login_response.json()['id']
         delete_courier(courier_id)
 
@@ -45,7 +45,7 @@ class TestCourierCreation:
         assert data['message'] == ERROR_DUPLICATE_LOGIN
         # Очистка
         login_payload = {"login": login, "password": password}
-        login_response = requests.post(COURIER_URL + '/login', json=login_payload)
+        login_response = requests.post(COURIER_LOGIN_URL, json=login_payload)
         courier_id = login_response.json()['id']
         delete_courier(courier_id)
 
